@@ -93,25 +93,19 @@ unsigned long long int Fibonacci(unsigned int n){
     }
 }
 
-int i = 0;
-//Prints reversed string FIXME
+//Prints reversed string
 void PrintReverseString(const string& str, ostream& output){
-    size_t numChars = str.length();
-    output << str.back();
-    if (numChars == 1) {
-        output << str << endl;
-    } else {
-        output << str.back();
-        //output << str[numChars];
-        //PrintReverseString(str.substr(0, numChars - 1));
-
-        //string(str).pop_back();
-        //PrintReverseString(str.substr(0, numChars));
+    size_t numOfChars = str.size();
+    if(numOfChars == 1) {
+        output << str;
+    }
+    else {
+        output << str[numOfChars - 1];
+        PrintReverseString(str.substr(0, numOfChars - 1), output);
     }
 }
 
 
-//FIXME You may change the parameters of these functions
 size_t MinimumPosition(const int array[], size_t size){
     if (size == 1) {
         return 0;
@@ -122,9 +116,6 @@ size_t MinimumPosition(const int array[], size_t size){
         } else return min;
     }
 }
-
-
-int posOfSmallest = 0;
 
 void SelectionSort(int array[], size_t size){
     int maxIndex = 0, temp = 0, index = 0;
