@@ -84,15 +84,112 @@ int main() {
 	return 0;
 }
 
+//Returns number n in Fibonacci sequence (Note: Input must be >= 1)
 unsigned long long int Fibonacci(unsigned int n){
-	return 0;
+    if (n == 0 || n == 1) {
+        return n;
+    } else {
+        return (Fibonacci(n-1) + Fibonacci(n-2));
+    }
 }
-void PrintReverseString(const string& str, ostream& output){
-}
-// You may change the parameters of these functions
-size_t MinimumPosition(const int array[], size_t size){
-	return 0;
-}
-void SelectionSort(int array[], size_t size){
 
+int i = 0;
+//Prints reversed string FIXME
+void PrintReverseString(const string& str, ostream& output){
+    size_t numChars = str.length();
+    output << str.back();
+    if (numChars == 1) {
+        output << str << endl;
+    } else {
+        output << str.back();
+        //output << str[numChars];
+        //PrintReverseString(str.substr(0, numChars - 1));
+
+        //string(str).pop_back();
+        //PrintReverseString(str.substr(0, numChars));
+    }
+}
+
+
+//FIXME You may change the parameters of these functions
+size_t MinimumPosition(const int array[], size_t size){
+    if (size == 1) {
+        return 0;
+    } else {
+        size_t min = (MinimumPosition(array, size - 1));
+        if (array[size] < array[min]) {
+            return size;
+        } else return min;
+    }
+}
+
+
+int posOfSmallest = 0;
+
+void SelectionSort(int array[], size_t size){
+    /*
+    if (size - a == 1) {
+        return;
+    } else {
+        int smallest = array[a]; //assume the first element is the smallest, because, so far, it is.
+        int b = a; //b is used to track the position of the smallest element in the array
+        for (int i = a; i < size; ++i) //loop through all values to find the smallest element
+        {
+            if (array[i] < smallest) {
+                smallest = array[i]; //set the smallest element so far
+                b = i; //remember position
+            }
+        }
+        //put smallest element in its proper position
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+
+        SelectionSort(array, size, a+1);
+        //SelectionSort(array, size, a + 1); //sort the next sub array
+    }*/
+
+
+    //If one element, exit function
+    if (size == 1) {
+        return;
+    } else {
+        int curSmallest  = array[posOfSmallest];
+        for (int j = posOfSmallest + 1; j < size; j++) {
+            if (array[j] < curSmallest) {
+                posOfSmallest = j;
+                int temp = curSmallest;
+                curSmallest = array[posOfSmallest];
+                array[posOfSmallest] = temp;
+                SelectionSort(array, size);
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+    /*
+    int minPosition = MinimumPosition(array, size - 1);
+    if (minPosition != index) {
+        //Swap
+        temp = array[index];
+        array[index] = array[minPosition];
+        array[minPosition] = temp;
+    }
+    index++;
+    SelectionSort(array, size);*/
+
+    /*
+    if (minpos1 != pos1){
+        temp=arr1[pos1];
+        arr1[pos1]=arr1[minpos1];
+        arr1[minpos1]=temp;
+    }
+    recurselectSort(arr1, len1, pos1 + 1);
+    */
 }
