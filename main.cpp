@@ -127,69 +127,21 @@ size_t MinimumPosition(const int array[], size_t size){
 int posOfSmallest = 0;
 
 void SelectionSort(int array[], size_t size){
-    /*
-    if (size - a == 1) {
-        return;
-    } else {
-        int smallest = array[a]; //assume the first element is the smallest, because, so far, it is.
-        int b = a; //b is used to track the position of the smallest element in the array
-        for (int i = a; i < size; ++i) //loop through all values to find the smallest element
-        {
-            if (array[i] < smallest) {
-                smallest = array[i]; //set the smallest element so far
-                b = i; //remember position
-            }
+    int maxIndex = 0, temp = 0, index = 0;
+    for (index = maxIndex; index < size; index++) {
+        //Check if a smaller value exists
+        if (array[maxIndex] < array[index]) {
+            maxIndex = index;
         }
-        //put smallest element in its proper position
-        int temp = array[a];
-        array[a] = array[b];
-        array[b] = temp;
-
-        SelectionSort(array, size, a+1);
-        //SelectionSort(array, size, a + 1); //sort the next sub array
-    }*/
-
-
-    //If one element, exit function
-    if (size == 1) {
-        return;
-    } else {
-        int curSmallest  = array[posOfSmallest];
-        for (int j = posOfSmallest + 1; j < size; j++) {
-            if (array[j] < curSmallest) {
-                posOfSmallest = j;
-                int temp = curSmallest;
-                curSmallest = array[posOfSmallest];
-                array[posOfSmallest] = temp;
-                SelectionSort(array, size);
-            }
-        }
-
-
     }
 
+    //Swap old smallest with new smallest
+    temp = array[size-1];
+    array[size-1] = array[maxIndex];
+    array[maxIndex] = temp;
 
-
-
-
-
-    /*
-    int minPosition = MinimumPosition(array, size - 1);
-    if (minPosition != index) {
-        //Swap
-        temp = array[index];
-        array[index] = array[minPosition];
-        array[minPosition] = temp;
-    }
-    index++;
-    SelectionSort(array, size);*/
-
-    /*
-    if (minpos1 != pos1){
-        temp=arr1[pos1];
-        arr1[pos1]=arr1[minpos1];
-        arr1[minpos1]=temp;
-    }
-    recurselectSort(arr1, len1, pos1 + 1);
-    */
+    //Repeat
+    if (size > 1) {
+        SelectionSort( array, --size ) ;
+    } else return;
 }
